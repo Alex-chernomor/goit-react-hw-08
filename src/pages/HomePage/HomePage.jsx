@@ -4,7 +4,7 @@ export default function HomePage() {
   return (
     <div>
         <PageTitle>
-             Contact manager welcome page
+        Welcome on contact manager web-site
         </PageTitle>
     </div>
   )
