@@ -1,0 +1,25 @@
+
+.inputField {
+    width: 100%;
+    max-width: 350px;
+    height: 40px;
+    margin-bottom: 10px;
+    font-size: 16px; 
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    border-radius: 5px; 
+}
+
+.label{
+    display: block;
+    font-size: 18px;
+    width: 100%;
+    margin-bottom: 12px;
+}
+.submitButton{
+    width: 150px;
+}
+
+.error{
+    color:red ;
+}
