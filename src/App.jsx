@@ -3,8 +3,9 @@ import { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import './App.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { refreshUser } from './redux/auth/operations';
+import { selectIsRefreshing } from './redux/auth/selectors';
 import RestrictedRoute from './components/RestrictedRoute';
 import PrivateRoute from './components/PrivateRoute';
 
@@ -16,13 +17,16 @@ const NotFoundPage = lazy(()=>import('./pages/NotFoundPage/NotFoundPage'));
 
 function App() {
   const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(()=>{
     dispatch(refreshUser())
   },[dispatch]);
 
 
-  return (
+  return  isRefreshing ? (
+    <strong>Getting user data please wait...</strong>
+  ) : (
      <Layout>
       <Suspense fallback={<p>Loading...</p>}>
           <Routes>
@@ -40,7 +44,7 @@ function App() {
           </Routes>
         </Suspense>
       </Layout>
-  )
+  );
 }
 
 export default App

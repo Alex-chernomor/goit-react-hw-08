@@ -7,7 +7,6 @@ import { deleteContact } from '../../redux/contacts/operations';
 import { Toaster, toast } from 'react-hot-toast';
 import ModalWindow from '../ModalWindow/ModalWindow';
 import { useState } from 'react';
-
 export default function ContactList(){
   const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
@@ -21,7 +20,6 @@ export default function ContactList(){
 
   const handleOpenModal = () =>{
     setModalOpen(true);
-    setContactId(returnId);
   }
   const returnId = (id) =>{
     setContactId(id)

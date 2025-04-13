@@ -3,7 +3,9 @@ import {
   fetchContacts,
    addContact,
    deleteContact,
+   editContact,
   } from './operations'
+import { logOut } from '../auth/operations';
 
 const slice = createSlice({
     name:'items',
@@ -47,9 +49,23 @@ const slice = createSlice({
             state.items = state.items.filter(
               (item) => item.id !== action.payload.id
             );
+          }) 
+          .addCase(editContact.pending, (state) => {
+            state.loading = true;
+            state.error = false;
           })
+          .addCase(editContact.fulfilled, (state, action) => {
+            state.loading = false;
+            state.items = action.payload;
+          })
+          .addCase(editContact.rejected, (state) => {
+            state.loading = false;
+            state.error = true;
+          })
+          .addCase(logOut.fulfilled, (state) => {
+            state.items = [];
+          });
       },
 });
-
 
 export default slice.reducer;

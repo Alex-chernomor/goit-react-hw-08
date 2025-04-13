@@ -5,9 +5,9 @@ import { addContact } from '../../redux/contacts/operations';
 import { useDispatch } from 'react-redux';
 import { Toaster, toast } from 'react-hot-toast';
 
-const ContactSchema = Yup.object().shape({
+export const ContactSchema = Yup.object().shape({
     contactName: Yup.string()
-    .min(3, 'Must be min 3 chars')
+    .min(2, 'Must be min 2 chars')
     .trim()
     .required('This field is required'),
     contactNumber:Yup.string()
@@ -17,7 +17,7 @@ const ContactSchema = Yup.object().shape({
 
 export default function ContactForm() {
     const dispatch = useDispatch();
-
+    
    const handleSubmit = (e,actions)=>{  
     dispatch(addContact({
         id: Date.now(),
@@ -27,9 +27,8 @@ export default function ContactForm() {
     .unwrap()
     .then(()=>toast.success('Contact added'))
     actions.resetForm();
-   }
+   } 
 
-   
   return (
    <div>
      <Formik  initialValues={{
@@ -51,10 +50,11 @@ export default function ContactForm() {
             </div>
         </Form>
     </Formik>
-        <Toaster
-            position="top-center"
-            reverseOrder={false}
-            />
+
+    <Toaster
+      position="top-center"
+      reverseOrder={false}
+    />
    </div>
   )
 }
